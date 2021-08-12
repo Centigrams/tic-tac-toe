@@ -1,4 +1,4 @@
-let game = (function () {
+const game = (function () {
 
     let board = ["", "", "", "", "", "", "", "", ""];
 
@@ -35,7 +35,9 @@ let game = (function () {
     }
 
     // Mark cell if valid
-    function markCell();
+    function markCell() {
+
+    };
 
     // Check if game is finished and transition player turns
     function checkEndGame() {
@@ -58,4 +60,4 @@ let game = (function () {
     }
 })();
 document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', game.initiateGame));
-document.querySelector('.reset-button').addEventListener('click', reset);
+document.querySelector('.reset-button').addEventListener('click', game.reset);
