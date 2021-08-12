@@ -17,41 +17,75 @@ const game = (function () {
     let currentPlayer = "X";
     const gameStatus = document.querySelector('.game-status');
 
-    // Game status messages:
     const win = () => `${currentPlayer} won!`;
     const tie = "It's a tie!";
-    const playerTurn = `It's ${currentPlayer}'s turn`;
+    const playerTurn = () => `It's ${currentPlayer}'s turn`;
 
-    //Initiate Game on click.
+    // Start game on click.
     function initiateGame(event) {
-        const clickedCell = e.target;
+        const clickedCell = event.target;
         const clickedCellValue = clickedCell.getAttribute('data-cell');
 
         if (board[clickedCellValue] !== "" || !gameOngoing) return;
 
-        markCell();
-        checkEndGame();
-
+        markCell(clickedCell, clickedCellValue);
+        checkCombo();
     }
 
-    // Mark cell if valid
-    function markCell() {
-
+    function markCell(clickedCellElement, clickedCellValue) {
+        board[clickedCellValue] = currentPlayer;
+        clickedCellElement.textContent = currentPlayer;
     };
 
-    // Check if game is finished and transition player turns
-    function checkEndGame() {
+    function checkCombo() {
+        let gameEnd = false;
+        for (let i = 0; i <= 7; i++) {
+            let firstChar = board[winningCombo[i][0]];
+            let secondChar = board[winningCombo[i][1]];
+            let thirdChar = board[winningCombo[i][2]];
 
+            // Continue while there are no winning combos.
+            if (!firstChar || !secondChar || !thirdChar) {
+                continue;
+            }
+
+            if (firstChar === secondChar && secondChar === thirdChar) {
+                gameEnd = true;
+                break;
+            }
+        }
+
+        let tieGame = !board.includes("");
+
+        if (gameEnd) {
+            gameOngoing = false;
+            gameStatus.textContent = win();
+            return;
+        }
+
+        if (tieGame) {
+            gameOngoing = false;
+            gameStatus.textContent = tie;
+            return;
+        }
+
+        const changePlayer = () => {
+            if (currentPlayer === 'X') {
+                currentPlayer = 'O';
+            } else {
+                currentPlayer = 'X';
+            }
+        }
+        changePlayer();
     };
 
-    // Function to change player after move
-    function changePlayer() {
 
-    }
-
-    // Restart Game
     function reset() {
-
+        document.querySelectorAll('.cell').forEach(cell => cell.textContent = "");
+        gameOngoing = true;
+        currentPlayer = "X";
+        board = ["", "", "", "", "", "", "", "", ""];
+        gameStatus.textContent = playerTurn();
     }
 
     return {
