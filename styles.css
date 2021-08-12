@@ -87,15 +87,16 @@ main {
 .reset-button {
   display: grid;
   margin: 0 auto;
-  margin-top: 2%;
+  margin-top: 3%;
   width: 10rem;
-  height: 5rem;
+  height: 4rem;
   align-items: center;
   font-size: 1.8em;
   font-family: 'Varela Round', sans-serif;
   border: none;
   border-radius: 0.5em;
   background-color: none;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1366px) {
@@ -112,6 +113,7 @@ main {
   }
 
   .reset-button {
+    margin-top: 2%;
     width: 8rem;
     height: 3rem;
     font-size: 1.5em;
