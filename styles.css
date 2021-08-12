@@ -84,6 +84,20 @@ main {
   border-bottom: none;
 }
 
+.reset-button {
+  display: grid;
+  margin: 0 auto;
+  margin-top: 2%;
+  width: 10rem;
+  height: 5rem;
+  align-items: center;
+  font-size: 1.8em;
+  font-family: 'Varela Round', sans-serif;
+  border: none;
+  border-radius: 0.5em;
+  background-color: none;
+}
+
 @media screen and (max-width: 1366px) {
   :root {
     --cell-size: 6.5rem;
@@ -96,4 +110,10 @@ main {
   .game-status {
     font-size: 1.8rem;
   }
+
+  .reset-button {
+    width: 8rem;
+    height: 3rem;
+    font-size: 1.5em;
+  }  
 }
