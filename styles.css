@@ -21,6 +21,7 @@ body {
 
 :root {
     --cell-size: 10rem;
+    --marker-size: calc((var(--cell-size)) * .9);
 }
 
 header, main {
@@ -54,6 +55,10 @@ header, main {
     width: var(--cell-size);
     height: var(--cell-size);
     border: 1px solid black;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    font-size: var(--marker-size);
 }
 
 .cell:first-child,
@@ -62,11 +67,11 @@ header, main {
     border-top: none;
 }
 
-.cell:nth-child(3n +1) {
+.cell:nth-child(3n + 1) {
     border-left: none
 }
 
-.cell:nth-child(3n +3) {
+.cell:nth-child(3n + 3) {
     border-right: none
 }
 
