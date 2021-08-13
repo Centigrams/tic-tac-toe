@@ -11,6 +11,7 @@ html {
 
 body {
   margin: 0;
+  background-color: var(--background-color);
 }
 
 *,
@@ -24,6 +25,8 @@ body {
 :root {
   --cell-size: 10rem;
   --marker-size: calc((var(--cell-size)) * 0.9);
+  --background-color: #F5F0E1;
+  --primary-element-color: #1E3D59;
 }
 
 header,
@@ -34,12 +37,14 @@ main {
 .game-title {
   margin-top: 1.5rem;
   font-size: 3.5rem;
+  color: var(--primary-element-color);
 }
 
-.game-status {
+#game-status {
   margin-top: 3%;
   font-size: 2rem;
   font-family: "Varela Round", sans-serif;
+  color: var(--primary-element-color);
 }
 
 .board {
@@ -57,7 +62,7 @@ main {
 .cell {
   width: var(--cell-size);
   height: var(--cell-size);
-  border: 1px solid black;
+  border: 1px solid var(--primary-element-color);
   display: grid;
   justify-items: center;
   align-items: center;
@@ -95,7 +100,8 @@ main {
   font-family: 'Varela Round', sans-serif;
   border: none;
   border-radius: 0.5em;
-  background-color: none;
+  background-color: var(--primary-element-color);
+  color: var(--background-color);
   cursor: pointer;
 }
 
