@@ -39,6 +39,7 @@ const game = (function () {
 
     function checkCombo() {
         let gameEnd = false;
+        //There are 7 possible winning combinations.
         for (let i = 0; i <= 7; i++) {
             let firstChar = board[winningCombo[i][0]];
             let secondChar = board[winningCombo[i][1]];
@@ -68,17 +69,21 @@ const game = (function () {
             gameStatus.textContent = tie;
             return;
         }
-
-        const changePlayer = () => {
-            if (currentPlayer === 'X') {
-                currentPlayer = 'O';
-            } else {
-                currentPlayer = 'X';
-            }
-        }
         changePlayer();
     };
 
+    function changePlayer() {
+        // Switch the markers every turn
+        if (currentPlayer === 'X') currentPlayer = 'O';
+        else currentPlayer = 'X';
+
+        // Change the game status matching the markers
+        if (currentPlayer === 'X') {
+            gameStatus.textContent = playerTurn();
+        } else {
+            gameStatus.textContent = playerTurn();
+        }
+    }
 
     function reset() {
         document.querySelectorAll('.cell').forEach(cell => cell.textContent = "");
@@ -89,7 +94,7 @@ const game = (function () {
     }
 
     return {
-        initiateGame, 
+        initiateGame,
         reset
     }
 })();
