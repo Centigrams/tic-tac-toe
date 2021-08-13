@@ -15,7 +15,7 @@ const game = (function () {
 
     let gameOngoing = true;
     let currentPlayer = "X";
-    const gameStatus = document.querySelector('.game-status');
+    const gameStatus = document.getElementById('game-status');
 
     const win = () => `${currentPlayer} won!`;
     const tie = "It's a tie!";
@@ -33,6 +33,10 @@ const game = (function () {
     }
 
     function markCell(clickedCellElement, clickedCellValue) {
+
+        if (currentPlayer === 'X') clickedCellElement.style.color = '#1E3D59';
+        else clickedCellElement.style.color = '#1E3D59';
+
         board[clickedCellValue] = currentPlayer;
         clickedCellElement.textContent = currentPlayer;
     };
@@ -74,15 +78,12 @@ const game = (function () {
 
     function changePlayer() {
         // Switch the markers every turn
-        if (currentPlayer === 'X') currentPlayer = 'O';
-        else currentPlayer = 'X';
-
-        // Change the game status matching the markers
-        if (currentPlayer === 'X') {
-            gameStatus.textContent = playerTurn();
+        if (currentPlayer === 'X'){
+            currentPlayer = 'O';
         } else {
-            gameStatus.textContent = playerTurn();
+            currentPlayer = 'X';
         }
+        gameStatus.textContent = playerTurn();
     }
 
     function reset() {
