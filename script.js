@@ -1,6 +1,7 @@
 const game = (function () {
-
     let board = ["", "", "", "", "", "", "", "", ""];
+    let gameOngoing = true;
+    let currentPlayer = "X";
 
     const winningCombo = [
         [0, 1, 2],
@@ -13,29 +14,15 @@ const game = (function () {
         [0, 4, 8]
     ];
 
-    let gameOngoing = true;
-    let currentPlayer = "X";
-    const gameStatus = document.getElementById('game-status');
-
-    const _win = () => `${currentPlayer} won!`;
     const tie = "It's a tie!";
-    const _playerTurn = () => `It's ${currentPlayer}'s turn`;
+    const win = () => `${currentPlayer} won!`;
+    const playerTurn = () => `It's ${currentPlayer}'s turn`;
 
     const resetButton = document.querySelector('.reset-button');
     const gameTitle = document.querySelector('.game-title');
+    const gameStatus = document.getElementById('game-status');
 
-    // Start game on click.
-    function initiateGame(event) {
-        const clickedCell = event.target;
-        const clickedCellValue = clickedCell.getAttribute('data-cell');
-
-        if (board[clickedCellValue] !== "" || !gameOngoing) return;
-
-        _markCell(clickedCell, clickedCellValue);
-        _checkCombo();
-    }
-
-    function _markCell(clickedCellElement, clickedCellValue) {
+    const markCell = (clickedCellElement, clickedCellValue) => {
         if (currentPlayer === 'X'){
             clickedCellElement.style.color = '#003049';
             gameTitle.style.color = '#003049';
@@ -47,15 +34,36 @@ const game = (function () {
         clickedCellElement.textContent = currentPlayer;
     }
 
-    function _checkCombo() {
+    const changePlayer = () => {
+        // 'Reverse' color scheme to match next marker
+        if (currentPlayer === 'O') {
+            gameStatus.style.color = '#003049';
+            gameTitle.style.color = '#003049'
+        } else {
+            gameStatus.style.color = '#d62828';
+            gameTitle.style.color = '#d62828'
+        }
+
+        if (currentPlayer === 'X') {
+            currentPlayer = 'O';
+        } else {
+            currentPlayer = 'X';
+        }
+        gameStatus.textContent = playerTurn();
+    }
+
+    const checkWinsWhileSwitchingPlayerTurns = () => {
         let gameEnd = false;
-        //There are 7 possible winning combinations.
+
+        /*
+        There are 7 possible winning combinations (refer to winningCombo array).
+        Set gameEnd to true if a winning combination has been found by the three char variables.
+         */
         for (let i = 0; i <= 7; i++) {
             let firstChar = board[winningCombo[i][0]];
             let secondChar = board[winningCombo[i][1]];
             let thirdChar = board[winningCombo[i][2]];
 
-            // Continue while there are no winning combos.
             if (!firstChar || !secondChar || !thirdChar) {
                 continue;
             }
@@ -66,11 +74,9 @@ const game = (function () {
             }
         }
 
-        let tieGame = !board.includes("");
-
         if (gameEnd) {
             gameOngoing = false;
-            gameStatus.textContent = _win();
+            gameStatus.textContent = win();
             if (currentPlayer === 'O') {
                 resetButton.style.backgroundColor = '#d62828';
                 gameTitle.style.color = '#d62828';
@@ -81,6 +87,8 @@ const game = (function () {
             return;
         }
 
+        let tieGame = !board.includes("");
+
         if (tieGame) {
             gameOngoing = false;
             gameStatus.textContent = tie;
@@ -89,33 +97,25 @@ const game = (function () {
             gameTitle.style.color = '#f77f00';
             return;
         }
-        _changePlayer();
-    }
-    
-    function _changePlayer() {
-        // 'Reverse' color scheme to match next marker
-        if (currentPlayer === 'O') {
-            gameStatus.style.color = '#003049';
-            gameTitle.style.color = '#003049'
-        } else {
-            gameStatus.style.color = '#d62828';
-            gameTitle.style.color = '#d62828'
-        }
-        // Switch the markers every turn
-        if (currentPlayer === 'X') {
-            currentPlayer = 'O';
-        } else {
-            currentPlayer = 'X';
-        }
-        gameStatus.textContent = _playerTurn();
+        changePlayer();
     }
 
-    function reset() {
+    const initiateGame = (event) => {
+        const clickedCell = event.target;
+        const clickedCellValue = clickedCell.getAttribute('data-cell');
+
+        if (board[clickedCellValue] !== "" || !gameOngoing) return;
+
+        markCell(clickedCell, clickedCellValue);
+        checkWinsWhileSwitchingPlayerTurns();
+    }
+
+    const reset = () => {
         document.querySelectorAll('.cell').forEach(cell => cell.textContent = "");
         gameOngoing = true;
         currentPlayer = "X";
         board = ["", "", "", "", "", "", "", "", ""];
-        gameStatus.textContent = _playerTurn();
+        gameStatus.textContent = playerTurn();
         gameStatus.style.color = '#003049';
         resetButton.style.backgroundColor = '#3c3744';
         gameTitle.style.color = '#003049';
@@ -123,7 +123,7 @@ const game = (function () {
 
     return {
         initiateGame,
-        reset
+        reset,
     }
 })();
 document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', game.initiateGame));
