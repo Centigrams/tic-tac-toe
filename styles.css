@@ -26,7 +26,7 @@ body {
   --cell-size: 10rem;
   --marker-size: calc((var(--cell-size)) * 0.9);
   --background-color: #F5F0E1;
-  --primary-element-color: #1E3D59;
+  --primary-element-color: #293241;
 }
 
 header,
