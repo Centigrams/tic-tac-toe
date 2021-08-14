@@ -33,9 +33,9 @@ const game = (function () {
     }
 
     function markCell(clickedCellElement, clickedCellValue) {
-        //// if (currentPlayer === 'X') clickedCellElement.style.color = '#1E3D59';
-        //// else clickedCellElement.style.color = '#1E3D59';
-        clickedCellElement.style.color = '#1E3D59';
+        if (currentPlayer === 'X') clickedCellElement.style.color = '#355070';
+        else clickedCellElement.style.color = '#e56b6f';
+        // clickedCellElement.style.color = '#1E3D59';
         board[clickedCellValue] = currentPlayer;
         clickedCellElement.textContent = currentPlayer;
     }
@@ -76,6 +76,9 @@ const game = (function () {
     }
 
     function changePlayer() {
+        if (currentPlayer === 'O') gameStatus.style.color = '#355070';
+        else gameStatus.style.color = '#e56b6f'
+
         // Switch the markers every turn
         if (currentPlayer === 'X'){
             currentPlayer = 'O';
