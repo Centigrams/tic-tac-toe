@@ -25,7 +25,7 @@ body {
 :root {
   --cell-size: 10rem;
   --marker-size: calc((var(--cell-size)) * 0.9);
-  --background-color: #F5F0E1;
+  --background-color: #F7F8F3;
   --primary-element-color: #3c3744;
   --x-turn-color: #003049;
 }
@@ -38,7 +38,7 @@ main {
 .game-title {
   margin-top: 1.5rem;
   font-size: 3.5rem;
-  color: var(--primary-element-color);
+  color: var(--x-turn-color);
 }
 
 #game-status {

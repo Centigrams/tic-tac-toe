@@ -21,6 +21,9 @@ const game = (function () {
     const tie = "It's a tie!";
     const playerTurn = () => `It's ${currentPlayer}'s turn`;
 
+    const resetButton = document.querySelector('.reset-button');
+    const gameTitle = document.querySelector('.game-title');
+
     // Start game on click.
     function initiateGame(event) {
         const clickedCell = event.target;
@@ -33,8 +36,13 @@ const game = (function () {
     }
 
     function markCell(clickedCellElement, clickedCellValue) {
-        if (currentPlayer === 'X') clickedCellElement.style.color = '#003049';
-        else clickedCellElement.style.color = '#d62828';
+        if (currentPlayer === 'X'){
+            clickedCellElement.style.color = '#003049';
+            gameTitle.style.color = '#003049';
+        } else {
+            clickedCellElement.style.color = '#d62828';
+            gameTitle.style.color = '#d62828';
+        }
         board[clickedCellValue] = currentPlayer;
         clickedCellElement.textContent = currentPlayer;
     }
@@ -63,6 +71,13 @@ const game = (function () {
         if (gameEnd) {
             gameOngoing = false;
             gameStatus.textContent = win();
+            if (currentPlayer === 'O') {
+                resetButton.style.backgroundColor = '#d62828';
+                gameTitle.style.color = '#d62828';
+            } else {
+                resetButton.style.backgroundColor = '#003049'
+                gameTitle.style.color = '#003049';
+            }
             return;
         }
 
@@ -70,16 +85,22 @@ const game = (function () {
             gameOngoing = false;
             gameStatus.textContent = tie;
             gameStatus.style.color = '#f77f00';
+            resetButton.style.backgroundColor = '#f77f00';
+            gameTitle.style.color = '#f77f00';
             return;
         }
         changePlayer();
     }
-
+    
     function changePlayer() {
         // 'Reverse' color scheme to match next marker
-        if (currentPlayer === 'O') gameStatus.style.color = '#003049';
-        else gameStatus.style.color = '#d62828'
-
+        if (currentPlayer === 'O') {
+            gameStatus.style.color = '#003049';
+            gameTitle.style.color = '#003049'
+        } else {
+            gameStatus.style.color = '#d62828';
+            gameTitle.style.color = '#d62828'
+        }
         // Switch the markers every turn
         if (currentPlayer === 'X') {
             currentPlayer = 'O';
@@ -96,6 +117,8 @@ const game = (function () {
         board = ["", "", "", "", "", "", "", "", ""];
         gameStatus.textContent = playerTurn();
         gameStatus.style.color = '#003049';
+        resetButton.style.backgroundColor = '#3c3744';
+        gameTitle.style.color = '#003049';
     }
 
     return {
