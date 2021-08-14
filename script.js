@@ -17,9 +17,9 @@ const game = (function () {
     let currentPlayer = "X";
     const gameStatus = document.getElementById('game-status');
 
-    const win = () => `${currentPlayer} won!`;
+    const _win = () => `${currentPlayer} won!`;
     const tie = "It's a tie!";
-    const playerTurn = () => `It's ${currentPlayer}'s turn`;
+    const _playerTurn = () => `It's ${currentPlayer}'s turn`;
 
     const resetButton = document.querySelector('.reset-button');
     const gameTitle = document.querySelector('.game-title');
@@ -31,11 +31,11 @@ const game = (function () {
 
         if (board[clickedCellValue] !== "" || !gameOngoing) return;
 
-        markCell(clickedCell, clickedCellValue);
-        checkCombo();
+        _markCell(clickedCell, clickedCellValue);
+        _checkCombo();
     }
 
-    function markCell(clickedCellElement, clickedCellValue) {
+    function _markCell(clickedCellElement, clickedCellValue) {
         if (currentPlayer === 'X'){
             clickedCellElement.style.color = '#003049';
             gameTitle.style.color = '#003049';
@@ -47,7 +47,7 @@ const game = (function () {
         clickedCellElement.textContent = currentPlayer;
     }
 
-    function checkCombo() {
+    function _checkCombo() {
         let gameEnd = false;
         //There are 7 possible winning combinations.
         for (let i = 0; i <= 7; i++) {
@@ -70,7 +70,7 @@ const game = (function () {
 
         if (gameEnd) {
             gameOngoing = false;
-            gameStatus.textContent = win();
+            gameStatus.textContent = _win();
             if (currentPlayer === 'O') {
                 resetButton.style.backgroundColor = '#d62828';
                 gameTitle.style.color = '#d62828';
@@ -89,10 +89,10 @@ const game = (function () {
             gameTitle.style.color = '#f77f00';
             return;
         }
-        changePlayer();
+        _changePlayer();
     }
     
-    function changePlayer() {
+    function _changePlayer() {
         // 'Reverse' color scheme to match next marker
         if (currentPlayer === 'O') {
             gameStatus.style.color = '#003049';
@@ -107,7 +107,7 @@ const game = (function () {
         } else {
             currentPlayer = 'X';
         }
-        gameStatus.textContent = playerTurn();
+        gameStatus.textContent = _playerTurn();
     }
 
     function reset() {
@@ -115,7 +115,7 @@ const game = (function () {
         gameOngoing = true;
         currentPlayer = "X";
         board = ["", "", "", "", "", "", "", "", ""];
-        gameStatus.textContent = playerTurn();
+        gameStatus.textContent = _playerTurn();
         gameStatus.style.color = '#003049';
         resetButton.style.backgroundColor = '#3c3744';
         gameTitle.style.color = '#003049';
