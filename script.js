@@ -33,13 +33,12 @@ const game = (function () {
     }
 
     function markCell(clickedCellElement, clickedCellValue) {
-
-        if (currentPlayer === 'X') clickedCellElement.style.color = '#1E3D59';
-        else clickedCellElement.style.color = '#1E3D59';
-
+        //// if (currentPlayer === 'X') clickedCellElement.style.color = '#1E3D59';
+        //// else clickedCellElement.style.color = '#1E3D59';
+        clickedCellElement.style.color = '#1E3D59';
         board[clickedCellValue] = currentPlayer;
         clickedCellElement.textContent = currentPlayer;
-    };
+    }
 
     function checkCombo() {
         let gameEnd = false;
@@ -74,7 +73,7 @@ const game = (function () {
             return;
         }
         changePlayer();
-    };
+    }
 
     function changePlayer() {
         // Switch the markers every turn
