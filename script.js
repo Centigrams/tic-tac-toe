@@ -23,7 +23,7 @@ const game = (function () {
     const gameStatus = document.getElementById('game-status');
 
     const markCell = (clickedCellElement, clickedCellValue) => {
-        if (currentPlayer === 'X'){
+        if (currentPlayer === 'X') {
             clickedCellElement.style.color = '#003049';
             gameTitle.style.color = '#003049';
         } else {
