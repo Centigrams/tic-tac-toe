@@ -26,7 +26,8 @@ body {
   --cell-size: 10rem;
   --marker-size: calc((var(--cell-size)) * 0.9);
   --background-color: #F5F0E1;
-  --primary-element-color: #1E3D59;
+  --primary-element-color: #3c3744;
+  --x-turn-color: #003049;
 }
 
 header,
@@ -44,7 +45,7 @@ main {
   margin-top: 3%;
   font-size: 2rem;
   font-family: "Varela Round", sans-serif;
-  color: var(--primary-element-color);
+  color: var(--x-turn-color);
 }
 
 .board {
