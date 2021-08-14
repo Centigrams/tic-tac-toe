@@ -33,9 +33,8 @@ const game = (function () {
     }
 
     function markCell(clickedCellElement, clickedCellValue) {
-        if (currentPlayer === 'X') clickedCellElement.style.color = '#355070';
-        else clickedCellElement.style.color = '#e56b6f';
-        // clickedCellElement.style.color = '#1E3D59';
+        if (currentPlayer === 'X') clickedCellElement.style.color = '#003049';
+        else clickedCellElement.style.color = '#d62828';
         board[clickedCellValue] = currentPlayer;
         clickedCellElement.textContent = currentPlayer;
     }
@@ -70,17 +69,19 @@ const game = (function () {
         if (tieGame) {
             gameOngoing = false;
             gameStatus.textContent = tie;
+            gameStatus.style.color = '#f77f00';
             return;
         }
         changePlayer();
     }
 
     function changePlayer() {
-        if (currentPlayer === 'O') gameStatus.style.color = '#355070';
-        else gameStatus.style.color = '#e56b6f'
+        // 'Reverse' color scheme to match next marker
+        if (currentPlayer === 'O') gameStatus.style.color = '#003049';
+        else gameStatus.style.color = '#d62828'
 
         // Switch the markers every turn
-        if (currentPlayer === 'X'){
+        if (currentPlayer === 'X') {
             currentPlayer = 'O';
         } else {
             currentPlayer = 'X';
@@ -94,6 +95,7 @@ const game = (function () {
         currentPlayer = "X";
         board = ["", "", "", "", "", "", "", "", ""];
         gameStatus.textContent = playerTurn();
+        gameStatus.style.color = '#003049';
     }
 
     return {
