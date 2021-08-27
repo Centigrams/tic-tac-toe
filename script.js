@@ -132,6 +132,6 @@ const game = (function () {
     initiateGame,
     reset,
   };
-}());
+})();
 document.querySelectorAll('.cell').forEach((cell) => cell.addEventListener('click', game.initiateGame));
 document.querySelector('.reset-button').addEventListener('click', game.reset);
