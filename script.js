@@ -16,7 +16,7 @@ const game = (function () {
   ];
 
   const tie = "It's a tie!";
-  const win = () => `${currentPlayer} won!`;
+  const win = () => `${currentPlayer} won! Piolo using haxx`;
   const playerTurn = () => `It's ${currentPlayer}'s turn`;
 
   const resetButton = document.querySelector('.reset-button');
@@ -132,6 +132,6 @@ const game = (function () {
     initiateGame,
     reset,
   };
-})();
+}());
 document.querySelectorAll('.cell').forEach((cell) => cell.addEventListener('click', game.initiateGame));
 document.querySelector('.reset-button').addEventListener('click', game.reset);
