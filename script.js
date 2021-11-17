@@ -16,7 +16,7 @@ const game = (function () {
   ];
 
   const tie = "It's a tie!";
-  const win = () => `${currentPlayer} won! Piolo using haxx`;
+  const win = () => `${currentPlayer} won!`;
   const playerTurn = () => `It's ${currentPlayer}'s turn`;
 
   const resetButton = document.querySelector('.reset-button');
